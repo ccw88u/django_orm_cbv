@@ -1,0 +1,13 @@
+{% extends "proj/cbv_base.html" %}
+
+{% block body_block %}
+<h1>Delete {{school.name }}?</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <input type="submit" class="btn btn-danger" value="刪除">
+  <a href="{% url 'list' pk=school.pk%} ">取消</a>
+
+</form>
+
+{% endblock %}

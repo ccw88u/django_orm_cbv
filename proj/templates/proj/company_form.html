@@ -1,0 +1,19 @@
+{% extends "proj/cbv_base.html" %}
+
+{% block body_block %}
+<h1>
+  {% if not form.instance.pk %}
+  Create 新增新公司名稱
+  {% else %}
+  新增公司完畢
+  {% endif %}
+</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class='btn btn-primary' value="Submit">
+
+  </form>
+
+
+{% endblock %}

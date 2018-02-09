@@ -1,6 +1,13 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import View, TemplateView, RedirectView, ListView, DetailView
+
+from . import models
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import (View,TemplateView,
+                                ListView,DetailView,
+                                CreateView,DeleteView,
+                                UpdateView)
 
 # Create your views here.
 
@@ -22,3 +29,32 @@ def rootindex(request):
 
 def index(request):
     return render(request, 'proj/index.html')
+
+
+########################公司資訊 簡目 / 列出成員 / 新增 / 刪除 / 修改{S}########################
+## 公司資訊 (簡目)
+class companyListView(ListView):
+    model = models.company
+
+## 公司資訊 + 成員資訊
+class companyDetailView(DetailView):
+    context_object_name = 'company_details'
+    model = models.company
+    template_name = 'proj/company_detail.html'
+
+## 新增
+class companyCreateView(CreateView):
+    fields = ("name","tel","location")
+    model = models.company
+
+## 修改
+class companyUpdateView(UpdateView):
+    fields = ("name","age")
+    model = models.company
+
+## 刪除
+class companyDeleteView(DeleteView):
+    model = models.company
+    success_url = reverse_lazy("proj:list")
+    
+########################公司資訊 簡目 / 列出成員 / 新增 / 刪除 / 修改{E}########################

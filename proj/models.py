@@ -34,3 +34,26 @@ class website(models.Model):
     def __unicode__(self): 
     # 在Python3中使用 def __str__(self):        
         return u"%s" % (self.title)
+
+
+
+########################公司資訊 簡目 / 列出成員 / 新增 / 刪除 / 修改{S}########################
+## 公司資訊
+class company(models.Model):
+    name = models.CharField(max_length=256)
+    tel  = models.CharField(max_length=256)
+    location = models.CharField(max_length=256)
+    
+    def __unicode__(self): 
+        return u"%s" % (self.name)
+
+## 公司成員
+class member(models.Model):
+    name = models.CharField(max_length=256)
+    age = models.PositiveIntegerField()
+    member = models.ForeignKey(company, related_name='members')
+
+    def __unicode__(self): 
+        return u"%s" % (self.name)
+
+########################公司資訊 簡目 / 列出成員 / 新增 / 刪除 / 修改{E}########################
