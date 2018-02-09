@@ -1,12 +1,14 @@
 
 {% extends "proj/cbv_base.html" %}
+
 {% block body_block %}
   <div class="jumbotron">
 
     <h1>顯示所有公司清單於下</h1>
       <ol>
-        {% for comp in company_list %}
-          <h2><li><a href="{{comp.id}}/">{{comp.name}} </a></li></h2>
+        {% for comp in companys %}
+          <h2><li><a href="{{comp.id}}/">{{comp.name}} </a></li></h2>  
+          <a href="{% url 'delete' pk=comp.pk %}"> delete </a>
         {% endfor %}
       </ol>
 

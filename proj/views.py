@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.core.urlresolvers import reverse_lazy
 from . import models
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic import (View,TemplateView,
@@ -34,6 +34,7 @@ def index(request):
 ########################公司資訊 簡目 / 列出成員 / 新增 / 刪除 / 修改{S}########################
 ## 公司資訊 (簡目)
 class companyListView(ListView):
+    context_object_name = 'companys'
     model = models.company
 
 ## 公司資訊 + 成員資訊
@@ -44,17 +45,19 @@ class companyDetailView(DetailView):
 
 ## 新增
 class companyCreateView(CreateView):
+    ## default html company_form.html
     fields = ("name","tel","location")
     model = models.company
 
 ## 修改
 class companyUpdateView(UpdateView):
-    fields = ("name","age")
+    fields = ("name","tel")
     model = models.company
 
 ## 刪除
 class companyDeleteView(DeleteView):
+    context_object_name = 'company_details'
     model = models.company
-    success_url = reverse_lazy("proj:list")
+    success_url = reverse_lazy("list")
     
 ########################公司資訊 簡目 / 列出成員 / 新增 / 刪除 / 修改{E}########################

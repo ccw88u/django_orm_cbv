@@ -1,0 +1,25 @@
+{% extends 'proj/cbv_base.html' %}
+
+{% block title %}index.html block:title{% endblock %}
+
+
+{% block body_block %}
+<div class="jumbotron">
+<h2>公司資訊</h2>
+<p>公司名稱 : {{company_details.name}}</p>
+<p>公司電話 : {{company_details.tel}}</p>
+<p>公司住址 : {{company_details.location}}</p>
+
+<h3>員工清單</h3>
+
+{% for mem in company_details.members.all %}
+	<p>姓名:{{mem.name}}   年紀:{{mem.age}}</p>
+{% endfor %}
+
+</div>
+<div class="container">
+	<p><a class="btn btn-warning" href="{% url 'update' pk=company_details.pk %}">修改</a></p>
+</div>
+
+
+{% endblock %}

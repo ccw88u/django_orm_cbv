@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-
+from django.core.urlresolvers import reverse
 # Create your models here.
 
 
@@ -46,6 +46,9 @@ class company(models.Model):
     
     def __unicode__(self): 
         return u"%s" % (self.name)
+
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={'pk':self.pk})
 
 ## 公司成員
 class member(models.Model):
